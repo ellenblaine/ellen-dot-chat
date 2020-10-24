@@ -1,0 +1,78 @@
+.Message {
+  padding: 16px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  color: darkgray;
+  vertical-align: middle;
+
+  &.Message--ellen {
+    background-color: lightgray;
+  }
+
+  &.Message--visitor {
+    background-color: aquamarine;
+  }
+
+  &.Message--typing {
+    background-color: lightgray;
+    width: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+  }
+
+  animation-name: expand;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  
+  overflow: hidden;
+}
+
+// MESSAGE FADE IN
+@keyframes expand {
+  0% {
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+  }
+
+  100% {
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 100%;
+  }
+}
+
+// TYPING INDICATORS
+
+.Message__typing-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: darkgray;
+  animation-name: bounce;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-duration: 1s;
+  position: relative;
+}
+
+.Message__typing-indicator:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.Message__typing-indicator:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+@keyframes bounce {
+  25% {
+    transform: translateY(-8px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+}

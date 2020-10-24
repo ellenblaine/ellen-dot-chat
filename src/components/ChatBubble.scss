@@ -1,0 +1,7 @@
+.ChatBubble {
+  width: calc(100% - 32px);
+  display: grid;
+  grid-template-columns: 48px auto 48px;
+  column-gap: 16px;
+  align-items: end;
+}

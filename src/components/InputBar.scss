@@ -1,0 +1,29 @@
+.InputBar {
+  border: none;
+  line-height: 4em;
+  font-size: 1.25em;
+  margin-top: 16px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.InputBar--not-ready {
+  opacity: 0;
+}
+
+.InputBar--ready {
+  animation-name: fade-in;
+  animation-duration: 500ms;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,17 @@
+.App {
+  height: calc(100% - 300px);
+  width: 100%;
+  max-width: 500px;
+  padding: 150px 32px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 600px) {
+  .App {
+    height: calc(100% + 64px);
+    padding: 32px;
+  }
+}
