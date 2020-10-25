@@ -19,26 +19,39 @@ export default function Message(props: MessageProps) {
     }
   }, [typingStatus, onChangedStatus]);
 
+  const onFinishedIdleTransition = () => {
+    if (typingStatus === 'IDLE') {
+      onAnimationEnd();
+    }
+  }
+
+  let content;
   switch (typingStatus) {
     case 'TRANSITIONING':
-      return <div key={typingStatus}></div>;
+      break;
     case 'TYPING':
-      return (
-        <div className="Message Message--typing" key={typingStatus}>
-          <div className="Message__typing-indicator" />
-          <div className="Message__typing-indicator" />
-          <div className="Message__typing-indicator" />
-        </div>
+      content = (
+        <>
+          <div key="1" className="Message__typing-indicator" />
+          <div key="2" className="Message__typing-indicator" />
+          <div key="3" className="Message__typing-indicator" />
+        </>
       );
+      break;
     default:
-      return (
-        <div
-          className={`Message ${speaker === 'ELLEN' ? 'Message--ellen' : 'Message--visitor'}`}
-          key={typingStatus}
-          onAnimationEnd={onAnimationEnd}
-        >
-          {text}
-        </div>
-      )
+      content = <>{text}</>
   }
+
+  return (
+    <div
+      className={`Message
+        ${speaker === 'ELLEN' ? 'Message--ellen' : 'Message--visitor'}
+        ${typingStatus === 'TYPING' ? 'Message--typing' : ''}
+      `}
+      onAnimationEnd={onFinishedIdleTransition}
+      key={typingStatus}
+    >
+      {content}
+    </div>
+  )
 }

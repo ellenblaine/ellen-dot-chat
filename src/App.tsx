@@ -42,11 +42,13 @@ function App() {
   const [ready, setReady] = useState(false);
 
   const onChangedStatus = (newStatus: TypingStatus) => {
-    if (newStatus === 'IDLE' && !ready) {
-      // Ellen's first message is in, enable the input
+    dispatch(setStatus(newStatus));
+  }
+
+  const onReady = () => {
+    if (!ready) {
       setReady(true);
     }
-    dispatch(setStatus(newStatus));
   }
 
   const { messages, typingStatus: ellenTypingStatus } = chatState;
@@ -61,6 +63,7 @@ function App() {
         typingStatus={typingStatus}
         onChangedStatus={onChangedStatus}
         key={spokenAtMillis}
+        onAnimationEnd={onReady}
       />
     );
   });
