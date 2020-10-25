@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Avatar from './Avatar';
 import Message from './Message';
 import './ChatBubble.scss';
 
 export type ChatBubbleProps = {
   message: Message;
-  initialTypingStatus?: TypingStatus;
+  typingStatus: TypingStatus;
   onChangedStatus: (status: TypingStatus) => void;
 }
 
 export default function ChatBubble(props: ChatBubbleProps) {
-  const { message, initialTypingStatus, onChangedStatus } = props;
+  const { message, typingStatus, onChangedStatus } = props;
   const { text, speaker } = message;
-  const [typingStatus, setTypingStatus] = useState(initialTypingStatus);
   
   // Create artificial typing delay for Ellen
   useEffect(() => {
@@ -20,7 +19,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
     const isTyping = typingStatus === 'TYPING';
     if (isTyping && speaker === 'ELLEN') {
       timer = setTimeout(() => {
-        setTypingStatus('TRANSITIONING');
+        onChangedStatus('TRANSITIONING');
       }, 2000);
     }
     return () => {
@@ -28,7 +27,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
         clearTimeout(timer);
       }
     }
-  }, [typingStatus, speaker]);
+  }, [onChangedStatus, typingStatus, speaker]);
 
   return (
     <div className="ChatBubble">
@@ -37,7 +36,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
         text={text}
         speaker={speaker}
         typingStatus={typingStatus || 'IDLE'}
-        onChangedStatus={(status: TypingStatus) => setTypingStatus(status)}
+        onChangedStatus={(status: TypingStatus) => onChangedStatus(status)}
         onAnimationEnd={() => {
           if (typingStatus === 'IDLE') {
             onChangedStatus(typingStatus);

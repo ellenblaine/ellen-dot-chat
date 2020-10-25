@@ -1,18 +1,42 @@
-import React, {useState} from 'react';
+import React, { useState, useReducer } from 'react';
 import './App.scss';
 import ChatBubble from './components/ChatBubble';
 import InputBar from './components/InputBar';
+import {
+  ChatListReducer,
+  addMessage as addMessageAction,
+  setStatus,
+} from './reducer';
 
-function App() {
-  const messages: Message[] = [
+const initialState: ChatListState = {
+  messages: [
     {
       speaker: 'ELLEN',
+      spokenAtMillis: Date.now(),
       text: 'My name is Ellen 👋 Welcome to ellen.chat. Ask me anything!'
-    }
-  ];
+    },
+  ],
+  typingStatus: 'TYPING',
+}
 
-  const receiveMessage = (message: string) => {
-    console.log(`message was: ${message}`);
+function App() {
+  const [chatState, dispatch] = useReducer(ChatListReducer, initialState);
+
+  const addMessage = (text: string, speaker: Speaker) => {
+    return addMessageAction({ speaker, spokenAtMillis: Date.now(), text });
+  }
+
+  const letEllenRespondToMessage = (text: string) => {
+    // Start to respond after a delay
+    setTimeout(() => {
+      dispatch(setStatus('TYPING'));
+      dispatch(addMessage('This is Ellen\'s response', 'ELLEN'));
+    }, 2000);
+  }
+
+  const recordVisitorMessage = (text: string) => {
+    dispatch(addMessage(text, 'VISITOR'));
+    letEllenRespondToMessage(text);
   }
 
   const [ready, setReady] = useState(false);
@@ -22,12 +46,29 @@ function App() {
       // Ellen's first message is in, enable the input
       setReady(true);
     }
+    dispatch(setStatus(newStatus));
   }
+
+  const { messages, typingStatus: ellenTypingStatus } = chatState;
+  const chatBubbles = messages.map((message, index) => {
+    const { speaker, spokenAtMillis } = message;
+    // Only Ellen gets a typing indicator, and only her last message
+    const typingStatus = (speaker === 'ELLEN' && index === messages.length - 1) ?
+      ellenTypingStatus : 'IDLE'; 
+    return (
+      <ChatBubble
+        message={message}
+        typingStatus={typingStatus}
+        onChangedStatus={onChangedStatus}
+        key={spokenAtMillis}
+      />
+    );
+  });
 
   return (
     <div className="App">
-      <ChatBubble message={messages[0]} initialTypingStatus={'TYPING'} onChangedStatus={onChangedStatus} />
-      <InputBar onChange={receiveMessage} ready={ready} />
+      {chatBubbles}
+      <InputBar onChange={recordVisitorMessage} ready={ready} />
     </div>
   );
 }
