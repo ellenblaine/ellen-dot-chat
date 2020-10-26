@@ -3,8 +3,8 @@
   display: grid;
   grid-template-columns:
     48px
-    fit-content(calc(100% - 96px - 32px))
-    48px;
+    fit-content(calc(100% - 144px - 32px))
+    96px;
   grid-template-rows: min-content;
   column-gap: 16px;
   align-items: end;
@@ -13,4 +13,8 @@
 
 .ChatBubble--visitor {
   justify-content: end;
+  grid-template-columns:
+    96px
+    fit-content(calc(100% - 144px - 32px))
+    48px;
 }

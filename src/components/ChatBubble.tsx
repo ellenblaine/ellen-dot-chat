@@ -12,8 +12,7 @@ export type ChatBubbleProps = {
 
 export default function ChatBubble(props: ChatBubbleProps) {
   const { message, typingStatus, onChangedStatus, onAnimationEnd } = props;
-  const { text, speaker } = message;
-  console.log(typingStatus);
+  const { text, speaker, options } = message;
   
   // Create artificial typing delay for Ellen
   useEffect(() => {
@@ -40,6 +39,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
       <Message
         text={text}
         speaker={speaker}
+        options={options}
         typingStatus={typingStatus || 'IDLE'}
         onChangedStatus={(status: TypingStatus) => onChangedStatus(status)}
         onAnimationEnd={onAnimationEnd}

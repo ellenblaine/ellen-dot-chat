@@ -7,10 +7,17 @@ type MessageProps = {
   text: string;
   onChangedStatus: (status: TypingStatus) => void;
   onAnimationEnd: () => void;
+  options?: MessageOption[];
 }
 
 export default function Message(props: MessageProps) {
-  const { typingStatus, speaker, text, onChangedStatus, onAnimationEnd } = props;
+  const {
+    typingStatus,
+    speaker,
+    text,
+    onChangedStatus,
+    onAnimationEnd
+  } = props;
 
   useEffect(() => {
     if (typingStatus === 'TRANSITIONING') {
@@ -39,7 +46,11 @@ export default function Message(props: MessageProps) {
       );
       break;
     default:
-      content = <>{text}</>
+      content = (
+        <>
+          {text}
+        </>
+      )
   }
 
   return (

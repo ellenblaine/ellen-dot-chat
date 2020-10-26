@@ -6,6 +6,12 @@ type Message = {
   speaker: Speaker;
   spokenAtMillis: number;
   text: string;
+  options?: MessageOption[];
+}
+
+type MessageOption = {
+  text: string;
+  onClick: () => void;
 }
 
 type MessageAction = {

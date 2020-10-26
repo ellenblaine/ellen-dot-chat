@@ -1,0 +1,24 @@
+.MultipleChoiceMessage {
+  display: flex;
+  padding-left: 64px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.MultipleChoiceMessage__option {
+  margin-right: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 32px;
+  background-color: #0a66c2;
+  color: white;
+  text-transform: lowercase;
+  cursor: pointer;
+  &:hover {
+    background-color: #6eb2f7;
+  }
+}
+
+.MultipleChoiceMessage__option--hidden {
+  display: none;
+}
