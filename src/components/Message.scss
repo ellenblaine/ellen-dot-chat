@@ -28,7 +28,7 @@
   &.Message--typing, &.Message--ellen {
     animation-name: expand;
     animation-duration: 1s;
-    animation-timing-function: linear;
+    animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     
     overflow: hidden;
@@ -39,15 +39,10 @@
 // MESSAGE FADE IN
 @keyframes expand {
   0% {
-    max-width: 0;
-    max-height: 0;
     opacity: 0;
-    white-space: nowrap;
   }
 
   100% {
-    max-width: 100%;
-    max-height: 100%;
     opacity: 100%;
   }
 }

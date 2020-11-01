@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import './Message.scss';
+import { deserialize } from '../utils/slate';
+import SlateWrapper from './SlateWrapper';
 
 type MessageProps = {
   typingStatus: TypingStatus;
@@ -47,9 +49,7 @@ export default function Message(props: MessageProps) {
       break;
     default:
       content = (
-        <>
-          {text}
-        </>
+        <SlateWrapper readOnly={true} initialValue={deserialize(text)}/>
       )
   }
 

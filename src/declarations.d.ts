@@ -34,4 +34,6 @@ type BotResponse = {
   message?: Message;
 }
 
+type RichText = string;
+
 declare module 'react-redux';
