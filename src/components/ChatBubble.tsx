@@ -42,7 +42,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
     <div className={`ChatBubble ${speaker === 'ELLEN' ? 'ChatBubble--ellen' : 'ChatBubble--visitor'}`}>
       {
         speaker === 'ELLEN' ? 
-          <Avatar initials={'EB'} /> : <div />
+          <Avatar imageUrl={`${process.env.PUBLIC_URL}/ellen_small.jpeg`} initials={'EB'} /> : <div />
       }
       <Message
         text={text}

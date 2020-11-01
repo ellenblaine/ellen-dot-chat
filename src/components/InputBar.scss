@@ -4,6 +4,12 @@
   font-size: 1.25em;
   margin-top: 16px;
 
+  color: #7a00b3;
+
+  &::placeholder {
+    color: #c6acd2;
+  }
+
   &:focus {
     outline: none;
   }

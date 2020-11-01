@@ -6,16 +6,17 @@
   vertical-align: middle;
 
   &.Message--ellen {
-    background-color: lightgray;
+    color: #7a00b3;
+    background-color: #f7e5ff;
   }
 
   &.Message--visitor {
-    background-color: #3d99f5;
+    background-color: #7a00b3;
     color: white;
   }
 
   &.Message--typing {
-    background-color: lightgray;
+    background-color: #f7e5ff;
     width: 48px;
     display: flex;
     justify-content: space-between;
@@ -57,7 +58,7 @@
   width: 8px;
   height: 8px;
   border-radius: 4px;
-  background-color: darkgray;
+  background-color: #7a00b3;
   animation-name: bounce;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;

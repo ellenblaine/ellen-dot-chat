@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.scss';
 import ChatBubble from './components/ChatBubble';
 import InputBar from './components/InputBar';
@@ -25,13 +25,21 @@ function App(props: AppProps) {
 
   const [ready, setReady] = useState(false);
 
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const scrollToBottom = () => {
+    if (messagesEndRef && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+  useEffect(scrollToBottom, [messages]);  
+  
   const processVisitorMessage = (text: string) => {
     addMessageAction({
       speaker: 'VISITOR',
       spokenAtMillis: Date.now(),
       text
     });
-    
+
     // Compute Ellen's response, respond after a simulated typing delay
     const { message, action } = getResponse(text, processVisitorMessage);
     setTimeout(() => {
@@ -49,6 +57,7 @@ function App(props: AppProps) {
     if (!ready) {
       setReady(true);
     }
+    scrollToBottom();
   }
 
   if (!sentFirstMessage) {
@@ -81,7 +90,10 @@ function App(props: AppProps) {
 
   return (
     <div className="App">
-      {chatBubbles}
+      <div className="App__chat-container">
+        {chatBubbles}
+        <div ref={messagesEndRef}></div>
+      </div>
       <InputBar onChange={processVisitorMessage} ready={ready} />
     </div>
   );
