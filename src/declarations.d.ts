@@ -28,3 +28,10 @@ type ChatListState = {
   messages: Message[];
   typingStatus: TypingStatus;
 }
+
+type BotResponse = {
+  action?: () => void;
+  message?: Message;
+}
+
+declare module 'react-redux';

@@ -1,5 +1,10 @@
+const initialState: ChatListState = {
+  messages: [],
+  typingStatus: 'TYPING',
+};
+
 export const ChatListReducer = (
-  state: ChatListState,
+  state = initialState,
   action: MessageAction | TypingStatusAction,
 ): ChatListState => {
   switch (action.type) {

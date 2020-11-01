@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Avatar from './Avatar';
 import Message from './Message';
 import './ChatBubble.scss';
+import { START } from '../utils/constants';
 
 export type ChatBubbleProps = {
   message: Message;
@@ -29,6 +30,13 @@ export default function ChatBubble(props: ChatBubbleProps) {
       }
     }
   }, [onChangedStatus, typingStatus, speaker]);
+
+
+  if (text === START) {
+    // This is a sentinel that initializes virtual Ellen
+    // Don't display anything
+    return null;
+  }
 
   return (
     <div className={`ChatBubble ${speaker === 'ELLEN' ? 'ChatBubble--ellen' : 'ChatBubble--visitor'}`}>
